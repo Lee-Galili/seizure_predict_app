@@ -59,6 +59,7 @@ def get_file():
 
     return df, y_pred
 
+@st.cache
 def get_df(df, y_pred):
     window = 256*10
     # window = 100
@@ -75,14 +76,14 @@ def get_df(df, y_pred):
         st.session_state.df_final['results'] = final_y
         st.session_state.df_final['pos_signals'] = st.session_state.df_final.apply(lambda x: x['signals'] if x['results'] == 1 else np.NaN,axis=1)
         
-    if st.button('start'):
-        for i in range(0,len(st.session_state.df_final),30):
-            ax.set_xlim(i-256, i+50)
-            y_df_final = st.session_state.df_final[['signals', 'pos_signals']].iloc[:i]
-            ax.plot(y_df_final['signals'], color='b', label= "no-seizure")
-            ax.plot(y_df_final['pos_signals'], color='r', label = "seizure")
-            placeholder.pyplot(fig)
-            time.sleep(0.3)
+def get_plot():
+    for i in range(0,len(st.session_state.df_final),30):
+        ax.set_xlim(i-256, i+50)
+        y_df_final = st.session_state.df_final[['signals', 'pos_signals']].iloc[:i]
+        ax.plot(y_df_final['signals'], color='b', label= "no-seizure")
+        ax.plot(y_df_final['pos_signals'], color='r', label = "seizure")
+        placeholder.pyplot(fig)
+        time.sleep(0.3)
 
 
 
@@ -106,3 +107,6 @@ df, y_pred = get_file()
     
 if df is not None:
     get_df(df, y_pred)
+    if st.button('start'):
+        get_plot()
+
