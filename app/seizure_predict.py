@@ -31,18 +31,20 @@ h1 {
     text-align: center;
 }
 """
-
+if "api_call" not in st.session_state:
+    st.session_state.api_call = 1
 
 st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
 
-
-def get_file():
+st.cache
+def get_file(api_call):
     url = "https://seizure-predict-qkiben4ega-ew.a.run.app/upload_file/"
     url2 = "https://seizure-predict-qkiben4ega-ew.a.run.app/predict/"
     file = st.file_uploader("Upload an eeg file:")
 
     df = None
     y_pred = None
+    st.session_state.api_call += 1
 
     if file is not None:
         files = {"file" : file}
@@ -56,10 +58,10 @@ def get_file():
 
         df = pd.DataFrame(response2["signal"])
         y_pred = pd.DataFrame(response2["result"])
+        st.session_state.api_call = 1
 
     return df, y_pred
 
-@st.cache
 def get_df(df, y_pred):
     window = 256*10
     # window = 100
@@ -103,7 +105,7 @@ placeholder = st.pyplot(fig)
 # st.markdown("<div class='center'><span class='red'>seizure</span><span class='blue'> no seizure</span></div>", unsafe_allow_html=True)
 # st.markdown("<div class='blue'> no seizure </div>", unsafe_allow_html=True)
 
-df, y_pred = get_file()
+df, y_pred = get_file(st.session_state.api_call)
     
 if df is not None:
     get_df(df, y_pred)
