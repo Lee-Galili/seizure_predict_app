@@ -82,7 +82,7 @@ def show_plot(df, y_pred):
         ax.plot(y_df_final['signals'], color='b', label= "no-seizure")
         ax.plot(y_df_final['pos_signals'], color='r', label = "seizure")
         placeholder.pyplot(fig)
-        time.sleep(0.0001)
+        time.sleep(0.1)
 
 
 
