@@ -101,12 +101,14 @@ placeholder = st.pyplot(fig)
 
 # st.markdown("<div class='center'><span class='red'>seizure</span><span class='blue'> no seizure</span></div>", unsafe_allow_html=True)
 # st.markdown("<div class='blue'> no seizure </div>", unsafe_allow_html=True)
-
-if st.session_state.call_api:
-    df, y_pred = get_file()
+if "df" not in st.session_state:
+    st.session_state.df = None
     
-if df is not None:
-    get_df(df, y_pred)
+if st.session_state.call_api:
+    st.session_state.df, y_pred = get_file()
+    
+if st.session_state.df is not None:
+    get_df(st.session_state.df, y_pred)
     st.session_state.call_api = False
     if st.button('start'):
         get_plot()
