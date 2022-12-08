@@ -77,11 +77,11 @@ def show_plot(df, y_pred):
 
 
     for i in range(0,len(st.session_state.df_final),20):
-        plt.xlim(i-256, i+50)
         y_df_final = st.session_state.df_final[['signals', 'pos_signals']].iloc[:i]
         ax.plot(y_df_final['signals'], color='b', label= "no-seizure")
         ax.plot(y_df_final['pos_signals'], color='r', label = "seizure")
         placeholder.pyplot(fig)
+        plt.xlim(i-256, i+50)
         #time.sleep(0.000001)
 
 
