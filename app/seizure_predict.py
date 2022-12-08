@@ -79,13 +79,13 @@ def get_df(df, y_pred):
         
 def show_plot():
     df_len = len(st.session_state.df_final)
-        for i in range(0,df_len,30):
-            ax.set_xlim(i-256, i+50)
-            y_df_final = st.session_state.df_final[['signals', 'pos_signals']].iloc[:i]
-            ax.plot(y_df_final['signals'], color='b', label= "no-seizure")
-            ax.plot(y_df_final['pos_signals'], color='r', label = "seizure")
-            placeholder.pyplot(fig)
-            time.sleep(0.3)
+    for i in range(0,df_len,30):
+        ax.set_xlim(i-256, i+50)
+        y_df_final = st.session_state.df_final[['signals', 'pos_signals']].iloc[:i]
+        ax.plot(y_df_final['signals'], color='b', label= "no-seizure")
+        ax.plot(y_df_final['pos_signals'], color='r', label = "seizure")
+        placeholder.pyplot(fig)
+        time.sleep(0.3)
 
 
 
