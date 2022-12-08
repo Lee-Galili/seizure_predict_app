@@ -36,7 +36,7 @@ if "api_call" not in st.session_state:
 
 st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
 
-st.cache
+st.cache(allow_output_mutation=True)
 def get_file(api_call):
     url = "https://seizure-predict-qkiben4ega-ew.a.run.app/upload_file/"
     url2 = "https://seizure-predict-qkiben4ega-ew.a.run.app/predict/"
@@ -44,7 +44,6 @@ def get_file(api_call):
 
     df = None
     y_pred = None
-    st.session_state.api_call += 1
 
     if file is not None:
         files = {"file" : file}
@@ -59,6 +58,8 @@ def get_file(api_call):
         df = pd.DataFrame(response2["signal"])
         y_pred = pd.DataFrame(response2["result"])
         st.session_state.api_call = 1
+    else:
+        st.session_state.api_call += 1
 
     return df, y_pred
 
