@@ -75,7 +75,8 @@ def get_df(df, y_pred):
         st.session_state.df_final['results'] = final_y
         st.session_state.df_final['pos_signals'] = st.session_state.df_final.apply(lambda x: x['signals'] if x['results'] == 1 else np.NaN,axis=1)
         
-        #return True
+        if st.button('start'):
+            show_plot()
         
 def show_plot():
     df_len = len(st.session_state.df_final)
@@ -109,6 +110,3 @@ df, y_pred = get_file()
     
 if df is not None:
     get_df(df, y_pred)
-
-if st.button('start'):
-    show_plot()
