@@ -110,6 +110,5 @@ df, y_pred = get_file()
 if df is not None:
     get_df(df, y_pred)
 
-show_plot()
 if st.button('start'):
     show_plot()
