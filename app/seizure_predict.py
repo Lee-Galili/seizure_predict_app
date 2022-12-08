@@ -77,7 +77,7 @@ def get_df(df, y_pred):
         
         #return True
         
- def show_plot():
+def show_plot():
     df_len = len(st.session_state.df_final)
         for i in range(0,df_len,30):
             ax.set_xlim(i-256, i+50)
