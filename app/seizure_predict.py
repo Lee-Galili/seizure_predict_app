@@ -59,7 +59,6 @@ def get_file():
 
     return df, y_pred
 
-@st.cache
 def show_plot(df, y_pred):
     window = 256*10
     # window = 100
