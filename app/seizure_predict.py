@@ -104,11 +104,14 @@ placeholder = st.pyplot(fig)
 if "df" not in st.session_state:
     st.session_state.df = None
     
+if "y_pred" not in st.session_state:
+    st.session_state.y_pred = None
+    
 if st.session_state.call_api:
-    st.session_state.df, y_pred = get_file()
+    st.session_state.df, st.session_state.y_pred = get_file()
     
 if st.session_state.df is not None:
-    get_df(st.session_state.df, y_pred)
+    get_df(st.session_state.df, st.session_state.y_pred)
     st.session_state.call_api = False
     if st.button('start'):
         get_plot()
