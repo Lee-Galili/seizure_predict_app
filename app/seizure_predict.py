@@ -35,7 +35,7 @@ h1 {
 
 st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
 
-def get_file(api_call):
+def get_file():
     url = "https://seizure-predict-qkiben4ega-ew.a.run.app/upload_file/"
     url2 = "https://seizure-predict-qkiben4ega-ew.a.run.app/predict/"
     file = st.file_uploader("Upload an eeg file:")
@@ -101,7 +101,7 @@ placeholder = st.pyplot(fig)
 # st.markdown("<div class='center'><span class='red'>seizure</span><span class='blue'> no seizure</span></div>", unsafe_allow_html=True)
 # st.markdown("<div class='blue'> no seizure </div>", unsafe_allow_html=True)
 
-df, y_pred = get_file(st.session_state.api_call)
+df, y_pred = get_file()
     
 if df is not None:
     get_df(df, y_pred)
