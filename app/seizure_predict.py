@@ -82,7 +82,7 @@ def show_plot(df, y_pred):
         ax.plot(y_df_final['signals'], color='b', label= "no-seizure")
         ax.plot(y_df_final['pos_signals'], color='r', label = "seizure")
         placeholder.pyplot(fig)
-        time.sleep(0.001)
+        #time.sleep(0.000001)
 
 
 
@@ -94,7 +94,7 @@ plt.xlabel("Time")
 plt.xticks([])
 red_patch = mpatches.Patch(color='red', label='Seizure')
 blue_patch = mpatches.Patch(color='blue', label='No seizure')
-plt.legend(handles=[red_patch, blue_patch])
+plt.legend(handles=[red_patch, blue_patch], loc='upper right')
 
 placeholder = st.pyplot(fig)
 
