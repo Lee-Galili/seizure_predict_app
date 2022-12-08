@@ -105,4 +105,5 @@ placeholder = st.pyplot(fig)
 df, y_pred = get_file()
     
 if df is not None:
-    show_plot(df, y_pred)
+    if st.button('click me'):
+        show_plot(df, y_pred)
