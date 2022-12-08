@@ -37,8 +37,8 @@ st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
 
 
 def get_file():
-    url = "http://127.0.0.1:8000/upload_file/"
-    url2 = "http://127.0.0.1:8000/predict/"
+    url = "https://seizure-predict-qkiben4ega-ew.a.run.app/upload_file/"
+    url2 = "https://seizure-predict-qkiben4ega-ew.a.run.app/predict/"
     file = st.file_uploader("Upload an eeg file:")
 
     df = None
