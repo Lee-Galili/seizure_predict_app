@@ -59,7 +59,7 @@ def get_file():
 
     return df, y_pred
 
-def show_plot(df, y_pred):
+def get_df(df, y_pred):
     window = 256*10
     # window = 100
     # df = np.linspace(0, 500, 400)
@@ -74,9 +74,10 @@ def show_plot(df, y_pred):
         st.session_state.df_final['signals'] = df
         st.session_state.df_final['results'] = final_y
         st.session_state.df_final['pos_signals'] = st.session_state.df_final.apply(lambda x: x['signals'] if x['results'] == 1 else np.NaN,axis=1)
-
+    return True
+        
+ def show_plot():
     df_len = len(st.session_state.df_final)
-    if st.button('start'):
         for i in range(0,df_len,30):
             ax.set_xlim(i-256, i+50)
             y_df_final = st.session_state.df_final[['signals', 'pos_signals']].iloc[:i]
@@ -106,4 +107,8 @@ placeholder = st.pyplot(fig)
 df, y_pred = get_file()
     
 if df is not None:
-    show_plot(df, y_pred)
+    get_df(df, y_pred)
+
+show_plot()
+if st.button('start'):
+    show_plot()
