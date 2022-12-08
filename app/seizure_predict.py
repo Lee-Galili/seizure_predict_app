@@ -103,12 +103,7 @@ placeholder = st.pyplot(fig)
 # st.markdown("<div class='center'><span class='red'>seizure</span><span class='blue'> no seizure</span></div>", unsafe_allow_html=True)
 # st.markdown("<div class='blue'> no seizure </div>", unsafe_allow_html=True)
 
-if "df" not in st.session_state:
-    st.session_state.df, y_pred = get_file()
+df, y_pred = get_file()
     
-if st.session_state.df is None:
-    st.session_state.df, y_pred = get_file()
-
-    
-if st.session_state.df is not None:
-    show_plot(st.session_state.df, y_pred)
+if df is not None:
+    show_plot(df, y_pred)
