@@ -64,21 +64,21 @@ def show_plot(df, y_pred):
     # window = 100
     # df = np.linspace(0, 500, 400)
     # y_pred = pd.DataFrame({"test": [1,0,0,1]})
-    df_final = pd.DataFrame()
-    final_y = []
-    for j in range(len(y_pred)):
-        y = int(y_pred.iloc[j])
-        for i in range(window):
-            final_y.append(y)
+    if "df_final" not in st.session_state:
+        final_y = []
+        for j in range(len(y_pred)):
+            y = int(y_pred.iloc[j])
+            for i in range(window):
+                final_y.append(y)
+        st.session_state.df_final = pd.DataFrame()
+        st.session_state.df_final['signals'] = df
+        st.session_state.df_final['results'] = final_y
+        st.session_state.df_final['pos_signals'] = st.session_state.df_final.apply(lambda x: x['signals'] if x['results'] == 1 else np.NaN,axis=1)
 
-    df_final['signals'] = df
-    df_final['results'] = final_y
-    df_final['pos_signals'] = df_final.apply(lambda x: x['signals'] if x['results'] == 1 else np.NaN,axis=1)
 
-
-    for i in range(0,len(df_final),20):
+    for i in range(0,len(st.session_state.df_final),20):
         plt.xlim(i-256, i+50)
-        y_df_final = df_final[['signals', 'pos_signals']].iloc[:i]
+        y_df_final = st.session_state.df_final[['signals', 'pos_signals']].iloc[:i]
         ax.plot(y_df_final['signals'], color='b', label= "no-seizure")
         ax.plot(y_df_final['pos_signals'], color='r', label = "seizure")
         placeholder.pyplot(fig)
